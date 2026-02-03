@@ -1,0 +1,6 @@
+# Logs
+firebase-debug.log
+*.log
+
+# Unrelated projects
+/stockservice_project/
