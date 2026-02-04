@@ -1,26 +1,44 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Korean Stock Chart</title>
+    <title>SajuLab - Korean Fortune Reading</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <h1>주식 시장 분석</h1>
+    <div class="container">
+        <header>
+            <h1>SajuLab</h1>
+            <p class="subtitle">Korean Fortune Reading</p>
+        </header>
+        <main>
+            <div class="input-form">
+                <h2>Enter Your Birth Information</h2>
+                <div class="input-group">
+                    <label for="year">Year</label>
+                    <input type="number" id="year" placeholder="YYYY">
+                </div>
+                <div class="input-group">
+                    <label for="month">Month</label>
+                    <input type="number" id="month" placeholder="MM">
+                </div>
+                <div class="input-group">
+                    <label for="day">Day</label>
+                    <input type="number" id="day" placeholder="DD">
+                </div>
+                <div class="input-group">
+                    <label for="hour">Hour</label>
+                    <input type="number" id="hour" placeholder="HH">
+                </div>
+                <button id="submit-btn">See My Fortune</button>
+            </div>
+            <div class="result-section">
+                <h2>Your Fortune</h2>
+                <p id="result-text">Your fortune will be displayed here.</p>
+            </div>
+        </main>
     </div>
-
-    <div class="search-container">
-        <input type="text" id="symbol-input" placeholder="종목 코드를 입력하세요 (예: 005930)">
-        <button id="search-button">검색</button>
-    </div>
-
-    <div id="stock-info-container"></div>
-    <div id="chart-container"></div>
-
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
