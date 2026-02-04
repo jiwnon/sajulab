@@ -1,0 +1,7 @@
+name = "sajulab-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+# Placeholder for any variables the worker might need
+# SAJU_API_KEY = "YOUR_API_KEY"
