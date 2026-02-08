@@ -1,8 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-btn');
     const resultText = document.getElementById('result-text');
-    const todayFortuneText = document.getElementById('today-fortune-text'); // New element
-    const workerApiUrl = "https://sajulab-worker.alithya0707.workers.dev/api/saju"; // User's Worker URL
+    const todayFortuneText = document.getElementById('today-fortune-text');
+    const themeToggle = document.getElementById('theme-toggle');
+    const workerApiUrl = "https://sajulab-worker.alithya0707.workers.dev/api/saju";
+
+    // 다크/라이트 모드: 저장된 값 또는 시스템 설정 사용
+    const THEME_KEY = 'sajulab-theme';
+    function getPreferredTheme() {
+        const saved = localStorage.getItem(THEME_KEY);
+        if (saved === 'dark' || saved === 'light') return saved;
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+        return 'light';
+    }
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(THEME_KEY, theme);
+    }
+    setTheme(getPreferredTheme());
+    themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
 
     // Function to fetch and display Today's Fortune
     async function fetchTodayFortune() {

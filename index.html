@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SajuLab - Korean Fortune Reading</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        (function () {
+            var saved = localStorage.getItem('sajulab-theme');
+            var theme = (saved === 'dark' || saved === 'light') ? saved : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
         <header>
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="다크/라이트 모드 전환" title="다크/라이트 모드 전환">
+                <span class="theme-icon sun" aria-hidden="true">☀️</span>
+                <span class="theme-icon moon" aria-hidden="true">🌙</span>
+            </button>
             <h1>SajuLab</h1>
             <p class="subtitle">Korean Fortune Reading</p>
         </header>

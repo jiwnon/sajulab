@@ -1,54 +1,135 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 
+/* 라이트 모드 (기본) */
+:root,
+[data-theme="light"] {
+    --bg: #f4f4f9;
+    --card-bg: #fff;
+    --text: #333;
+    --text-muted: #555;
+    --heading: #2c3e50;
+    --subtitle: #7f8c8d;
+    --h2: #34495e;
+    --border: #eee;
+    --input-border: #ccc;
+    --result-bg: #ecf0f1;
+    --btn-bg: #3498db;
+    --btn-hover: #2980b9;
+    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 다크 모드 */
+[data-theme="dark"] {
+    --bg: #1a1a2e;
+    --card-bg: #16213e;
+    --text: #e8e8e8;
+    --text-muted: #b0b0b0;
+    --heading: #eaeaea;
+    --subtitle: #9ca3af;
+    --h2: #d1d5db;
+    --border: #2d3748;
+    --input-border: #4a5568;
+    --result-bg: #0f3460;
+    --btn-bg: #3498db;
+    --btn-hover: #5dade2;
+    --shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: var(--bg);
+    color: var(--text);
     margin: 0;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
     padding: 40px;
     max-width: 600px;
     width: 100%;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 header {
+    position: relative;
     text-align: center;
     margin-bottom: 30px;
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--border);
     padding-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--input-border);
+    border-radius: 50%;
+    background: var(--card-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background: var(--result-bg);
+}
+
+.theme-icon {
+    font-size: 1.4em;
+    position: absolute;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.theme-icon.moon {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon.sun {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon.moon {
+    opacity: 1;
 }
 
 h1 {
     font-family: 'Nanum Myeongjo', serif;
     font-weight: 700;
     font-size: 3em;
-    color: #2c3e50;
+    color: var(--heading);
     margin: 0;
+    transition: color 0.3s;
 }
 
 .subtitle {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 1.2em;
-    color: #7f8c8d;
+    color: var(--subtitle);
     margin-top: 5px;
+    transition: color 0.3s;
 }
 
 h2 {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
-    color: #34495e;
+    color: var(--h2);
     margin-top: 0;
+    transition: color 0.3s;
 }
 
 .input-form {
@@ -63,20 +144,24 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-    color: #555;
+    color: var(--text-muted);
+    transition: color 0.3s;
 }
 
 input[type="number"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+    background: var(--card-bg);
+    color: var(--text);
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
 }
 
 #submit-btn {
-    background-color: #3498db;
+    background-color: var(--btn-bg);
     color: white;
     padding: 12px 20px;
     border: none;
@@ -88,17 +173,32 @@ input[type="number"] {
 }
 
 #submit-btn:hover {
-    background-color: #2980b9;
+    background-color: var(--btn-hover);
 }
 
-.result-section {
-    background-color: #ecf0f1;
+.result-section,
+.today-fortune-section {
+    background-color: var(--result-bg);
     padding: 20px;
     border-radius: 4px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
 }
 
-#result-text {
+.today-fortune-section:last-child {
+    margin-bottom: 0;
+}
+
+#result-text,
+#today-fortune-text {
     font-size: 1em;
-    color: #555;
+    color: var(--text-muted);
     min-height: 50px;
+    transition: color 0.3s;
+}
+
+/* 다크모드에서 결과 영역 내부 링크/강조 색 유지 */
+[data-theme="dark"] #result-text a,
+[data-theme="dark"] #today-fortune-text a {
+    color: #5dade2;
 }
